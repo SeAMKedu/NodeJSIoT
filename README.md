@@ -55,3 +55,41 @@ app.set('view engine', 'ejs');
 // list for the measurements
 let measurementsArray = []
 ```
+
+The function (route) app.get('/', (request, response) handles a page request to the root. The function opens the measurements.ejs page in the browser. This program is based on the use of ejs templates.
+
+```javascript
+app.get('/', (request, response) => {
+  response.render('measurements')
+})
+```
+
+The function (route) app.post('/api/measurements', (request, response) receives a message sent via HTTP POST to /api/measurements. First, it checks that the message contains data. The data originally in the dictionary (pressure, temperature, humidity) is converted to list format, since Google Charts requires the data in list format.
+
+The whole list is serialized and sent to the browser application via an io.emit message.
+
+```javascript
+app.post('/api/measurements', (request, response) => {
+  const body = request.body
+
+  if (!body.pressure) {
+    return response.status(400).json({ 
+      error: 'content missing' 
+    })
+  }
+
+  let id = measurementsArray.length + 1
+  const arrayrow = [id.toString(), body.pressure, body.temperature, body.humidity]
+
+  measurementsArray.push(arrayrow)
+
+  // lähetetään lista listoja [[,,,], [,,,]...]
+  var s = JSON.stringify(measurementsArray);
+
+  // lähetetään kaikki mittaukset
+  io.emit('measdata', s);
+  console.log(arrayrow)
+
+  response.json(arrayrow)
+})  
+```
