@@ -1,4 +1,4 @@
-# NodeJSIoT
+# A simple IoT application using Node.js and Google Charts
 
 This example shows how measurement data can be displayed in a web application using Node.js (Express) and Google Chart so that the data is updated in real time.
 
