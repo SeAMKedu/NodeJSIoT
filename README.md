@@ -161,6 +161,7 @@ The drawChart function draws a line chart in the div element curve_chart:
           var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
   
           chart.draw(data, options);
+    }
 ```
 
 ## Installing libraries and running programs
