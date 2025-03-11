@@ -29,7 +29,7 @@ The generated measurements are sent to the server via HTTP Post:
 
 ```python
     # serialize the object to json and POST it the thingspeak
-    response = requests.post('http://localhost:3001/api/measurements/', json=measurements)
+    response = requests.post('http://localhost:3001/api/measurements/', json=measurement)
 ```
 
 ### index.js
