@@ -93,6 +93,22 @@ app.post('/api/measurements', (request, response) => {
   response.json(arrayrow)
 })  
 ```
+Initialization of the application at the end of the file:
+
+```javascript
+
+const PORT = 3001
+const server = app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
+})
+
+const io = socket(server);
+
+io.on('connection', (socket) => {
+  console.log('New connection')
+})
+
+```
 
 ### measurements.ejs
 
